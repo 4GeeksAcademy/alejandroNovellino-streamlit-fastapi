@@ -29,7 +29,7 @@ Clone the project repository to your local machine.
 Navigate to the project directory and install the required Python packages:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_dev.txt
 ```
 
 **Create a database (if needed)**
