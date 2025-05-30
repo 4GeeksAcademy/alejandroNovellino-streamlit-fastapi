@@ -7,3 +7,5 @@ scikit-learn
 seaborn
 kagglehub
 fastapi[standard]
+plotly[express]
+joblib
