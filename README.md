@@ -6,9 +6,10 @@ This boilerplate is designed to kickstart data science projects by providing a b
 
 The project is organized as follows:
 
-- `requirements.txt` - This file contains the list of necessary python packages.
+- `requirements.txt` - This file contains the list of necessary python packages for deployment.
+- `requirements_dev.txt` - This file contains the list of necessary python packages for studying the data and models.
 - `noteboks` - Notebooks to do the exploration of the data and the model.
-- `src` - This folder contains utility code for operations like database connections.
+- `src` - This folder contains the backend code.
 - `models/` - This directory should contain your SQLAlchemy model classes.
 - `data/` - This directory contains the following subdirectories:
   - `interin/` - For intermediate data that has been transformed.
@@ -20,7 +21,7 @@ The project is organized as follows:
 
 **Prerequisites**
 
-Make sure you have Python 3.11+ installed on your. You will also need pip for installing the Python packages.
+Make sure to have Python 3.11+ installed.
 
 **Installation**
 
@@ -32,57 +33,33 @@ Navigate to the project directory and install the required Python packages:
 pip install -r requirements_dev.txt
 ```
 
-**Create a database (if needed)**
-
-Create a new database within the Postgres engine by customizing and executing the following command: `$ createdb -h localhost -U <username> <db_name>`
-Connect to the Postgres engine to use your database, manipulate tables and data: `$ psql -h localhost -U <username> <db_name>`
-NOTE: Remember to check the ./.env file information to get the username and db_name.
-
-Once you are inside PSQL you will be able to create tables, make queries, insert, update or delete data and much more!
-
 **Environment Variables**
 
-Create a .env file in the project root directory to store your environment variables, such as your database connection string:
+Create a .env file in the project root directory to store your environment variables.
 
 ```makefile
-DATABASE_URL="your_database_connection_url_here"
+KAGGLEHUB_CACHE=../.
+CORS_URL=cors_url
 ```
 
 ## Running the Application
 
-To run the application, execute the app.py script from the root of the project directory:
+There is a FastAPI backend, to run it use the command:
 
 ```bash
-python app.py
+fastapi run .\src\main.py
 ```
 
-## Adding Models
+## Data example to test the project (should return rice)
 
-To add SQLAlchemy model classes, create new Python script files inside the models/ directory. These classes should be defined according to your database schema.
-
-Example model definition (`models/example_model.py`):
-
-```py
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
-
-Base = declarative_base()
-
-class ExampleModel(Base):
-    __tablename__ = 'example_table'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-
+```json
+{
+  "N": 90,
+  "P": 42,
+  "K": 43,
+  "temperature": 20.87974371,
+  "humidity": 82.00274423,
+  "ph": 6.502985292000001,
+  "rainfall": 202.9355362
+}
 ```
-
-## Working with Data
-
-You can place your raw datasets in the data/raw directory, intermediate datasets in data/interim, and the processed datasets ready for analysis in data/processed.
-
-To process data, you can modify the app.py script to include your data processing steps, utilizing pandas for data manipulation and analysis.
-
-## Contributors
-
-This template was built as part of the 4Geeks Academy [Data Science and Machine Learning Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about [4Geeks Academy's BootCamp programs](https://4geeksacademy.com/us/programs) here.
-
-Other templates and resources like this can be found on the school GitHub page.
