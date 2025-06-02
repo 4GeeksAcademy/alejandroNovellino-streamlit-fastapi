@@ -2,22 +2,19 @@ import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-
 from dtos import OnePredictionInputDto, OnePredictionOutputDto
-from wrapper import LogisticRegressionModelWrapper
+from utils.utils import config_model
+
 
 # load environment variables
 load_dotenv()
 cors_url = os.getenv("CORS_URL")
 
 # load the ML model
-try:
-    model_wrapper = LogisticRegressionModelWrapper(
-        model_path="models/model.pkl",
-        label_encoder_path="models/encoder.pkl"
-    )
-except RuntimeError as e:
-    raise Exception(f"No model. Cannot be initialized {e}")
+model_wrapper = config_model(
+    model_path="models/model.pkl",
+    label_encoder_path="models/encoder.pkl"
+)
 
 app = FastAPI()
 
